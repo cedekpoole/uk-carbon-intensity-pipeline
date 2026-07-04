@@ -15,6 +15,28 @@ This project uses the public Carbon Intensity API:
 - Base URL: `https://api.carbonintensity.org.uk`
 - Initial endpoints: `/intensity` and `/generation`
 
+## API Exploration
+
+### `/intensity`
+
+Purpose: fetch the current national carbon intensity period.
+
+Expected response shape:
+
+- Top-level `data` field is a list.
+- Each record contains `from`, `to`, and `intensity`.
+- `intensity` contains `forecast`, `actual`, and `index`.
+
+### `/generation`
+
+Purpose: fetch the current national generation mix.
+
+Expected response shape:
+
+- Top-level `data` field is an object.
+- `data` contains `from`, `to`, and `generationmix`.
+- `generationmix` is a list of records with `fuel` and `perc`.
+
 ## Milestone 1 Goals
 
 - Explore the API before building against it.
