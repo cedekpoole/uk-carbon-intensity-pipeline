@@ -17,11 +17,14 @@ def get_carbon_data(url):
 
 
 def main():
-    intensity_data = get_carbon_data(INTENSITY_URL)
-    generation_data = get_carbon_data(GENERATION_URL)
+    try:
+        intensity_data = get_carbon_data(INTENSITY_URL)
+        generation_data = get_carbon_data(GENERATION_URL)
 
-    print(intensity_data)
-    print(generation_data)
+        print(intensity_data)
+        print(generation_data)
+    except requests.exceptions.RequestException as e:
+        print(f"Error fetching data from API: {e}")
 
 
 if __name__ == "__main__":
