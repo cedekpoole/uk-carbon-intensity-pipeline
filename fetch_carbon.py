@@ -16,20 +16,27 @@ def get_carbon_data(url):
     return response.json()
 
 
-def validate_intensity_response(data):
-    if not data:
-        raise ValueError("Intensity response returned no data")
-    for line in data["data"]:
-        if "from" not in line or "to" not in line or "intensity" not in line:
+def validate_intensity_response(payload):
+    if not payload or "data" not in payload:
+        raise ValueError("Intensity response missing data")
+
+    for record in payload["data"]:
+        if "from" not in record or "to" not in record or "intensity" not in record:
             raise ValueError("Intensity response missing required fields")
 
 
-def validate_generation_response(data):
-    if not data:
-        raise ValueError("Generation response returned no data")
-    for line in data["data"]:
-        if "from" not in line or "to" not in line or "generationmix" not in line:
-            raise ValueError("Generation response missing required fields")
+def validate_generation_response(payload):
+    if not payload or "data" not in payload:
+        raise ValueError("Generation response missing data")
+
+    generation_data = payload["data"]
+
+    if (
+        "from" not in generation_data
+        or "to" not in generation_data
+        or "generationmix" not in generation_data
+    ):
+        raise ValueError("Generation response missing required fields")
 
 
 def main():
